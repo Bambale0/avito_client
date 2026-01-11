@@ -39,6 +39,11 @@ class ApiClient {
     return response.data
   }
 
+  async delete<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
+    const response = await this.client.delete(url, config)
+    return response.data
+  }
+
   // Метод для установки авторизации, если потребуется
   setAuthToken(token: string) {
     this.client.defaults.headers.common['Authorization'] = `Bearer ${token}`

@@ -316,7 +316,7 @@ const AutoloadPage: React.FC = () => {
                     </Typography>
 
                     {(() => {
-                      const totalStats = reports.reports.reduce((acc, report: any) => {
+                      const totalStats = (reports.reports as any[]).reduce((acc, report: any) => {
                         const stats = autoloadService.extractReportStats(report)
                         return {
                           total: acc.total + stats.totalItems,

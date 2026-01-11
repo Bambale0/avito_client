@@ -1,57 +1,23 @@
-// Типы для статистики
+// Re-export types from generated OpenAPI spec
+export type {
+  components,
+  operations,
+  paths
+} from './generated-types'
 
-export interface CallsStatsRequest {
-  dateFrom: string
-  dateTo: string
-  itemIds?: number[] | null
-}
+// Import for internal use
+import type { components } from './generated-types'
 
-export interface CallsStatsResponse {
-  result: Record<string, any>
-}
-
-export interface ItemsStatsRequest {
-  dateFrom: string
-  dateTo: string
-  fields: string[]
-  itemIds: number[]
-  periodGrouping?: string | null
-}
-
-export interface ItemsStatsResponse {
-  result: Record<string, any>
-}
-
-export interface ProfileStatsRequest {
-  dateFrom: string
-  dateTo: string
-  filter?: Record<string, any> | null
-  grouping: string
-  limit: number
-  metrics: string[]
-  offset: number
-  sort?: Record<string, any> | null
-}
-
-export interface ProfileStatsResponse {
-  result: Record<string, any>
-}
-
-export interface UserOperationsHistoryRequest {
-  dateTimeFrom: string
-  dateTimeTo: string
-}
-
-export interface UserOperationsHistoryResponse {
-  operations: Record<string, any>[]
-}
-
-export interface UserBalanceResponse {
-  bonus: number
-  real: number
-}
-
-// Типы для объявлений
+// Specific type exports for easier use
+export type CallsStatsRequest = components['schemas']['CallsStatsRequest']
+export type CallsStatsResponse = components['schemas']['CallsStatsResponse']
+export type ItemsStatsRequest = components['schemas']['ItemsStatsRequest']
+export type ItemsStatsResponse = components['schemas']['ItemsStatsResponse']
+export type ProfileStatsRequest = components['schemas']['ProfileStatsRequest']
+export type ProfileStatsResponse = components['schemas']['ProfileStatsResponse']
+export type UserOperationsHistoryRequest = components['schemas']['UserOperationsHistoryRequest']
+export type UserOperationsHistoryResponse = components['schemas']['UserOperationsHistoryResponse']
+export type UserBalanceResponse = components['schemas']['UserBalanceResponse']
 
 export interface ItemInfoResponse {
   autoload_item_id?: string | null
@@ -61,111 +27,57 @@ export interface ItemInfoResponse {
   url: string
   vas: VasInfo[]
 }
+export type VasInfo = components['schemas']['VasInfo']
+export type ItemVasPricesResponse = components['schemas']['ItemVasPricesResponse']
+export type StickerInfo = components['schemas']['StickerInfo']
+export type VasPricesRequest = components['schemas']['VasPricesRequest']
+export type ApplyVasRequest = components['schemas']['ApplyVasRequest']
+export type ApplyVasResponse = components['schemas']['ApplyVasResponse']
+export type UpdatePriceRequest = components['schemas']['UpdatePriceRequest']
+export type UpdatePriceResponse = components['schemas']['UpdatePriceResponse']
 
-export interface VasInfo {
-  slug: string
-  price: number
-  priceOld?: number | null
+export interface AutoloadFeed {
+  url: string
+  format: string
+  category: string
+  enabled: boolean
 }
 
-export interface ItemVasPricesResponse {
-  itemId: number
-  vas: VasInfo[]
-  stickers: StickerInfo[]
+export interface AutoloadSchedule {
+  // Define based on usage, assuming it's flexible
+  [key: string]: any
 }
-
-export interface StickerInfo {
-  id: number
-  title: string
-  description: string
-}
-
-export interface VasPricesRequest {
-  itemIds: number[]
-}
-
-export interface ApplyVasRequest {
-  slugs: string[]
-  stickers?: number[] | null
-}
-
-export interface ApplyVasResponse {
-  operationIds: Record<string, any>
-}
-
-export interface UpdatePriceRequest {
-  price: number
-}
-
-export interface UpdatePriceResponse {
-  result: Record<string, any>
-}
-
-// Типы для автозагрузки
 
 export interface AutoloadProfileRequest {
   agreement?: boolean | null
   autoload_enabled: boolean
-  feeds_data: Record<string, any>[]
+  feeds_data: AutoloadFeed[]
   report_email: string
-  schedule: Record<string, any>[]
+  schedule: AutoloadSchedule[]
 }
 
 export interface AutoloadProfileResponse {
   autoload_enabled: boolean
-  feeds_data: Record<string, any>[]
+  feeds_data: AutoloadFeed[]
   report_email: string
-  schedule: Record<string, any>[]
+  schedule: AutoloadSchedule[]
 }
+export type AutoloadReportsResponse = components['schemas']['AutoloadReportsResponse']
+export type AutoloadReportResponse = components['schemas']['AutoloadReportResponse']
+export type AutoloadItemsInfoResponse = components['schemas']['AutoloadItemsInfoResponse']
+export type CategoriesTreeResponse = components['schemas']['CategoriesTreeResponse']
+export type CategoryFieldsResponse = components['schemas']['CategoryFieldsResponse']
 
-export interface AutoloadReportsResponse {
-  meta: Record<string, any>
-  reports: Record<string, any>[]
-}
+export type WebhookSubscriptionRequest = components['schemas']['WebhookSubscriptionRequest']
+export type UserInfoResponse = components['schemas']['UserInfoResponse']
 
-export interface AutoloadReportResponse {
-  events: Record<string, any>[]
-  feeds_urls: Record<string, any>[]
-  finished_at: string
-  listing_fees: Record<string, any>
-  report_id: number
-  section_stats: Record<string, any>
-  source: string
-  started_at: string
-  status: string
-}
+// Email types
+export type EmailConfigRequest = components['schemas']['EmailConfigRequest']
+export type EmailConfigResponse = components['schemas']['EmailConfigResponse']
+export type SendEmailRequest = components['schemas']['SendEmailRequest']
+export type ReceiveEmailResponse = components['schemas']['ReceiveEmailResponse']
 
-export interface AutoloadItemsInfoResponse {
-  items: Record<string, any>[]
-}
-
-export interface CategoriesTreeResponse {
-  categories: Record<string, any>[]
-}
-
-export interface CategoryFieldsResponse {
-  alert?: Record<string, any> | null
-  fields: Record<string, any>[]
-  node: Record<string, any>
-}
-
-// Типы для настроек
-
-export interface WebhookSubscriptionRequest {
-  url: string
-}
-
-export interface UserInfoResponse {
-  email: string
-  id: number
-  name: string
-  phone?: string | null
-  phones: string[]
-  profile_url: string
-}
-
-// Типы для мессенджера
-
+// Chat and Message types are not fully specified in OpenAPI, using custom definitions
 export interface Chat {
   id: string
   user_id: string
@@ -186,16 +98,10 @@ export interface Message {
   image_url?: string
 }
 
-export interface SendMessageRequest {
-  chat_id: string
-  message: string
-}
+export type SendMessageRequest = components['schemas']['SendMessageRequest']
+export type SendImageMessageRequest = components['schemas']['SendImageMessageRequest']
 
-export interface SendImageMessageRequest {
-  chat_id: string
-  image_id: string
-}
-
+// Override generated types with proper interfaces
 export interface ChatsResponse {
   chats: Chat[]
 }
@@ -204,10 +110,7 @@ export interface MessagesResponse {
   messages: Message[]
 }
 
-export interface MessageResponse {
-  message_id: string
-  status: string
-}
+export type MessageResponse = components['schemas']['MessageResponse']
 
 // Общие типы для графиков
 export interface ChartDataPoint {

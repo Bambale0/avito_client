@@ -28,6 +28,8 @@ import {
   Upload,
   Refresh,
   Info,
+  Api,
+  Email,
 } from '@mui/icons-material'
 
 import WebhookSettings from '../components/Settings/WebhookSettings'
@@ -140,6 +142,7 @@ const SettingsPage: React.FC = () => {
         <Tabs value={tabValue} onChange={(_, newValue) => setTabValue(newValue)}>
           <Tab label="Уведомления" />
           <Tab label="Внешний вид" />
+          <Tab label="API" />
           <Tab label="Webhook'и" />
           <Tab label="Система" />
         </Tabs>
@@ -301,8 +304,146 @@ const SettingsPage: React.FC = () => {
         </Grid>
       </TabPanel>
 
-      {/* Вкладка webhook'ов */}
+      {/* Вкладка API */}
       <TabPanel value={tabValue} index={2}>
+        <Grid container spacing={3}>
+          <Grid item xs={12} md={6}>
+            <Card>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  <Api sx={{ mr: 1, verticalAlign: 'middle' }} />
+                  Avito API
+                </Typography>
+
+                <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                  Настройки подключения к Avito API
+                </Typography>
+
+                <Box display="flex" flexDirection="column" gap={2}>
+                  <TextField
+                    label="Client ID"
+                    value="your-client-id"
+                    InputProps={{ readOnly: true }}
+                    helperText="Получите на сайте Avito для разработчиков"
+                  />
+                  <TextField
+                    label="Client Secret"
+                    type="password"
+                    value="your-client-secret"
+                    InputProps={{ readOnly: true }}
+                    helperText="Хранится в защищенном хранилище"
+                  />
+                  <TextField
+                    label="User ID Avito"
+                    value="12345678"
+                    InputProps={{ readOnly: true }}
+                    helperText="Ваш ID пользователя на Avito"
+                  />
+                </Box>
+
+                <Box mt={3}>
+                  <Button variant="contained" color="primary">
+                    Настроить API
+                  </Button>
+                </Box>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12} md={6}>
+            <Card>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  <Email sx={{ mr: 1, verticalAlign: 'middle' }} />
+                  Email интеграция
+                </Typography>
+
+                <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                  Настройки для отправки и получения email
+                </Typography>
+
+                <Box display="flex" flexDirection="column" gap={2}>
+                  <FormControlLabel
+                    control={<Switch checked={true} />}
+                    label="Включить email интеграцию"
+                  />
+                  <Chip
+                    label="Настроено"
+                    color="success"
+                    size="small"
+                    sx={{ alignSelf: 'flex-start' }}
+                  />
+                </Box>
+
+                <Box mt={3}>
+                  <Button
+                    variant="outlined"
+                    startIcon={<Email />}
+                    onClick={() => window.location.href = '/email'}
+                  >
+                    Управление email
+                  </Button>
+                </Box>
+              </CardContent>
+            </Card>
+          </Grid>
+
+          <Grid item xs={12}>
+            <Card>
+              <CardContent>
+                <Typography variant="h6" gutterBottom>
+                  Статус подключений
+                </Typography>
+
+                <Grid container spacing={2}>
+                  <Grid item xs={12} md={4}>
+                    <Box display="flex" alignItems="center" gap={1}>
+                      <Box
+                        sx={{
+                          width: 12,
+                          height: 12,
+                          borderRadius: '50%',
+                          bgcolor: 'success.main',
+                        }}
+                      />
+                      <Typography variant="body2">Avito API: Подключено</Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <Box display="flex" alignItems="center" gap={1}>
+                      <Box
+                        sx={{
+                          width: 12,
+                          height: 12,
+                          borderRadius: '50%',
+                          bgcolor: 'success.main',
+                        }}
+                      />
+                      <Typography variant="body2">Email SMTP: Активен</Typography>
+                    </Box>
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <Box display="flex" alignItems="center" gap={1}>
+                      <Box
+                        sx={{
+                          width: 12,
+                          height: 12,
+                          borderRadius: '50%',
+                          bgcolor: 'success.main',
+                        }}
+                      />
+                      <Typography variant="body2">Webhook: Настроен</Typography>
+                    </Box>
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      </TabPanel>
+
+      {/* Вкладка webhook'ов */}
+      <TabPanel value={tabValue} index={3}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <WebhookSettings />
@@ -311,7 +452,7 @@ const SettingsPage: React.FC = () => {
       </TabPanel>
 
       {/* Вкладка системы */}
-      <TabPanel value={tabValue} index={3}>
+      <TabPanel value={tabValue} index={4}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
             <Card>
