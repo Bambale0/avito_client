@@ -1,179 +1,111 @@
-# Avito API Client
+# Avito Management Dashboard
 
-[![GitHub](https://img.shields.io/badge/GitHub-avito--client-blue)](https://github.com/Bambale0/avito_client)
-[![React](https://img.shields.io/badge/React-18.2.0-blue)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.2.2-blue)](https://www.typescriptlang.org/)
-[![Vite](https://img.shields.io/badge/Vite-5.1.0-yellow)](https://vitejs.dev/)
-[![Material-UI](https://img.shields.io/badge/Material--UI-5.15.10-blue)](https://mui.com/)
+> **React/TypeScript dashboard for marketplace operations** · listings · analytics · messenger · OAuth · API automation
+>
+> Repository codename: `avito_client`.
 
-Клиентское веб-приложение для управления Avito API сервисами.
+Avito Management Dashboard is a web client for operating Avito-related workflows through a backend API. It covers listings, analytics, promotion actions, customer messages and account-level operations in a single interface.
 
-## 🔗 Backend API
+## What this project demonstrates
 
-Этот клиент работает с [Avito API Backend](https://github.com/Bambale0/wlscrm) сервисом.
+- React + TypeScript application architecture.
+- Vite build pipeline.
+- Material UI component system.
+- React Router navigation.
+- Axios-based API layer.
+- Analytics charts with Recharts.
+- OAuth-oriented account connection flow.
+- Responsive desktop/tablet/mobile UI.
+- Integration with a separate backend service rather than embedding marketplace credentials in the browser.
 
-- **Production API**: https://dev.chillcreative.ru
-- **API Documentation**: https://dev.chillcreative.ru/docs
-- **Health Check**: https://dev.chillcreative.ru/health
+## Product areas
 
-## 🚀 Быстрый старт
+### Dashboard
 
-```bash
-# Установка зависимостей
-npm install
+- high-level listing/account statistics;
+- views and contact metrics;
+- system/API status;
+- visual analytics.
 
-# Запуск в режиме разработки
-npm run dev
+### Listings
 
-# Сборка для продакшена
-npm run build
+- active listing management;
+- price updates;
+- promotion actions;
+- bulk operations.
+
+### Messenger
+
+- customer conversations;
+- incoming-message handling;
+- sending messages and images;
+- webhook-oriented notification flow.
+
+### Analytics
+
+- views and contacts;
+- conversion indicators;
+- geography/time trends;
+- chart-based reporting.
+
+## Architecture
+
+```text
+React / TypeScript client
+          |
+          v
+      API service layer
+          |
+          v
+   Backend Avito service
+          |
+          +--> Avito Messenger API
+          +--> Listings / Ads API
+          +--> statistics / promotion APIs
+          +--> OAuth/account integration
 ```
 
-Приложение будет доступно на `http://localhost:5173`
+Production credentials belong to the backend/service environment and are not part of this public repository.
 
-## 📋 Возможности
+## Stack
 
-### 🏠 Дашборд
-- Общая статистика по объявлениям
-- Просмотры и контакты
-- Статус системы
-- Графики аналитики
+| Area | Technology |
+| --- | --- |
+| UI | React 18, TypeScript |
+| Build | Vite |
+| Components | Material UI |
+| Routing | React Router |
+| API client | Axios |
+| Charts | Recharts |
+| Quality | ESLint / Prettier |
+| Deployment | static production build / Docker-compatible serving |
 
-### 🏪 Управление объявлениями
-- Список активных объявлений
-- Применение услуг продвижения
-- Обновление цен
-- Массовые операции
+## Repository layout
 
-### 📊 Статистика и аналитика
-- Детальная аналитика просмотров
-- Конверсия в контакты
-- География просмотров
-- Временные тренды
-
-### 💬 Мессенджер
-- Чаты с покупателями
-- Уведомления о новых сообщениях
-- Отправка сообщений и изображений
-- Управление webhook'ами
-
-### ⚙️ Настройки
-- Конфигурация API ключей
-- Настройка webhook'ов
-- Управление уведомлениями
-- Профиль пользователя
-
-## 🛠️ Технологии
-
-- **React 18** - UI библиотека
-- **TypeScript** - типизация
-- **Vite** - сборщик
-- **Material-UI (MUI)** - компоненты интерфейса
-- **React Router** - маршрутизация
-- **Axios** - HTTP клиент
-- **Recharts** - графики и диаграммы
-
-## 🏗️ Архитектура
-
-```
+```text
 src/
-├── components/     # Переиспользуемые компоненты
-├── pages/         # Страницы приложения
-├── services/      # API сервисы
-├── types/         # TypeScript типы
-├── utils/         # Вспомогательные функции
-└── main.tsx       # Точка входа
+├── components/
+├── pages/
+├── services/
+├── types/
+├── utils/
+└── main.tsx
 ```
 
-## 🔗 API Интеграция
+## Local development
 
-Приложение взаимодействует с Avito API через прокси:
-
-- **Development**: Прокси через Vite на `dev.chillcreative.ru`
-- **Production**: Прямое подключение к API
-
-### Доступные API:
-
-- **Messenger API**: чаты, сообщения, webhook'и
-- **Ads API**: объявления, статистика, продвижение
-- **Autoload API**: автоматическая загрузка объявлений
-- **User API**: информация о пользователе
-
-## 🚀 Развертывание
-
-### Development
 ```bash
+npm install
 npm run dev
 ```
 
-### Production
+Production build:
+
 ```bash
+npm run lint
 npm run build
-npm run preview
 ```
 
-### Docker (опционально)
-```bash
-docker build -t avito-client .
-docker run -p 3000:80 avito-client
-```
+## Portfolio note
 
-## 🔐 Авторизация
-
-Приложение использует OAuth 2.0 для авторизации в Avito API:
-
-1. Пользователь нажимает "Войти"
-2. Перенаправление на Avito для авторизации
-3. Получение access token
-4. Сохранение токена в localStorage
-
-## 📱 Адаптивность
-
-Приложение полностью адаптивно и работает на:
-- 🖥️ Desktop (1200px+)
-- 💻 Tablet (768px - 1199px)
-- 📱 Mobile (320px - 767px)
-
-## 🎨 Темизация
-
-Используется Material-UI с кастомной темой в цветах Avito:
-- **Primary**: #ff6b35 (оранжевый)
-- **Secondary**: #007cba (синий)
-
-## 🔍 Мониторинг
-
-### Health Check
-```bash
-curl https://dev.chillcreative.ru/health
-```
-
-### Логи
-- Browser console для клиентских ошибок
-- Network tab для API запросов
-- Application > Local Storage для токенов
-
-## 🤝 Разработка
-
-### Скрипты
-```bash
-npm run lint    # Проверка кода
-npm run build   # Сборка проекта
-npm run preview # Предпросмотр сборки
-```
-
-### Code Style
-- ESLint для JavaScript/TypeScript
-- Prettier для форматирования (интегрировано в ESLint)
-- Husky для pre-commit hooks
-
-## 📄 Лицензия
-
-MIT License - см. файл LICENSE для деталей.
-
-## 📞 Поддержка
-
-При проблемах:
-1. Проверьте консоль браузера
-2. Убедитесь, что API сервер работает
-3. Проверьте network tab на ошибки API
-4. Очистите localStorage если проблемы с авторизацией
+This repository is included as a frontend/API-integration case. The more backend-heavy production projects on this profile demonstrate FastAPI, PostgreSQL, Redis, billing and worker architecture; this one shows the client side of an operational business dashboard.
